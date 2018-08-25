@@ -12,6 +12,7 @@ class Ingest(object):
         self.source_dir = myvars['Source_Directory']
         self.s3_name = myvars['Destination_Name']
         self.s3_dir = myvars['Destination_Directory']
+        self.action_list = myvars['Actions_List']
         self.stream = stream
 
 
@@ -21,6 +22,11 @@ class Ingest(object):
         print(self.source_dir)
         print(self.s3_name)
         print(self.s3_dir)
+        print(self.action_list)
+        
+    
+    def action_manager(self):
+        return None
 
 
     def ftp_download (self):
@@ -32,7 +38,7 @@ class Ingest(object):
             f'"{self.s3_dir}"'
         )
 
-
+#User specifies the json file to be parsed
 def read_args ():
     print("Read Args")
     parser = argparse.ArgumentParser()
@@ -43,6 +49,8 @@ def read_args ():
     return js
 
 
+#Reads filename var declared at top
+#No longer works but keeping for future testing
 def read_json ():
     print("Read JSON")
     with open(filename) as fn:
@@ -57,6 +65,7 @@ def process_work(myvars):
         print("Processing Stream :", k)
         ingest = Ingest(k,v)
         ingest.print_vars()
+        ingest.action_manager()
         ingest.ftp_download()
         #work_manager(k, v)
         # for key, val in v.items():
@@ -64,6 +73,7 @@ def process_work(myvars):
         #     print("Value:", val)
 
 
+#Not in use
 def work_manager(stream, myvars:dict):
     print("Work Manager")
     print("ftp_download", myvars['Source_Name'])

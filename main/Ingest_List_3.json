@@ -1,0 +1,20 @@
+{
+    "BroadRidge_Industry" : {
+        "Source_Name" : "Broadridge Industy.txt",
+        "Source_Directory" : "/dir1/dir2/",
+        "Actions_List": [
+        	"OnPrem Download",
+        	"Rename File",
+        	"S3 Upload"
+    	],
+        "Destination_Name" : "BroadridgeI_apr_2017.txt",
+        "Destination_Directory" : "3rdParty/Broadridge/Industry"
+    },
+    "BroadRidge_Vanguard" : {
+        "Source_Name" : "BroadridgeV.txt",
+        "Source_Directory" : "/dir1/dir2/",
+        "Actions_List": null,
+        "Destination_Name" : "BroadridgeV_apr_2017.txt",
+        "Destination_Directory" : "3rdParty/Broadridge/Vanguard"
+    }
+}
