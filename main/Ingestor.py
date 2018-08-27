@@ -29,7 +29,7 @@ class Ingest(object):
         outfile = ""#fetch file pattern to use
         for file in os.listdir(self.data_dir):
             if fnm.fnmatch(file, self.source_name_pattern):
-                os.rename(file, outfile)
+                os.rename(self.data_dir+file, self.data_dir+outfile)
                 print(file)
         return None
     
