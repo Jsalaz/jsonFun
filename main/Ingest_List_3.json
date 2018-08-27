@@ -1,6 +1,6 @@
 {
     "BroadRidge_Industry" : {
-        "Source_Name" : "Broadridge Industy.txt",
+        "Source_Name_Pattern" : "Broadridge Industy.txt",
         "Source_Directory" : "/dir1/dir2/",
         "Actions_List": [
         	"OnPrem Download",
@@ -11,7 +11,7 @@
         "Destination_Directory" : "3rdParty/Broadridge/Industry"
     },
     "BroadRidge_Vanguard" : {
-        "Source_Name" : "BroadridgeV.txt",
+        "Source_Name_Pattern" : "BroadridgeV*.txt",
         "Source_Directory" : "/dir1/dir2/",
         "Actions_List": null,
         "Destination_Name" : "BroadridgeV_apr_2017.txt",
