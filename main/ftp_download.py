@@ -7,6 +7,8 @@ import subprocess
 #     cd $REMOTEDIR
 #     mget -E $REGEX
 # DOWNLOAD
+
+# Global var
 LFTP_INSTALLED = False
 
 
