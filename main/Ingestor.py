@@ -53,6 +53,9 @@ class Ingest(object):
         return None
 
     def action_manager(self):
+        # No Actions
+        if self.action_list == None:
+            return
         # Ftp Actions
         if set(self.action_list) & FTP_Action_Set:
             # redirect to new script
@@ -70,7 +73,7 @@ class Ingest(object):
 def process_work(ingest_vars, config_vars):
     print("--- Process Work ---")
     for stream_name, stream_vars in ingest_vars.items():
-        print("Processing Stream :", stream)
+        print("Processing Stream :", stream_name)
         ingest = Ingest(stream_name, stream_vars, config_vars)
         ingest.action_manager()
 

@@ -21,7 +21,7 @@ def fetch_command(command, *args):
     command_dict = {
         "CheckInstall": ["which", "lftp"],
         "InstallLFTP": ["sudo", "yum", "-y", "install", "lftp"],
-        "FetchPassword" ["sudo", "jsia"]
+        "FetchPassword": ["sudo", "jsia"],
         "ListFiles": ["lftp", "-u", args[0], "-p", args[1]],
         "DownloadFile": ["lftp", "-u", args[0], "-p", args[1]],
         "DownloadMultiple": ["lftp", "-u", args[0], "-p", args[1]],
