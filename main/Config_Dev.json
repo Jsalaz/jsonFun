@@ -1,0 +1,9 @@
+{
+    "Bucketname": "mys3bucket",
+    "S3_KMS_ARN": "arn:aws:us-east-1:AccountName:alias/VGI_KMS_S3",
+    "App_ID": "afdi01d",
+    "App_Vault": "FDI_NONPRD",
+    "ZS_Password": "PasswordString",
+    "UP_Password": "PasswordString",
+    "FTP_DNS": "server.domain.com"
+}

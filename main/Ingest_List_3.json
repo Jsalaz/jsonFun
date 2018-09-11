@@ -2,10 +2,11 @@
     "BroadRidge_Industry" : {
         "Source_Name_Pattern" : "Broadridge Industy.txt",
         "Source_Directory" : "/dir1/dir2/",
-        "Actions_List": [
-        	"OnPrem Download",
-        	"Rename File",
-        	"S3 Upload"
+        "FTP_Source" : "ZS",
+        "Actions" : [
+        	"FTP_Download",
+        	"Rename_File",
+        	"S3_Upload"
     	],
         "Destination_Name" : "BroadridgeI_apr_2017.txt",
         "Destination_Directory" : "3rdParty/Broadridge/Industry"
@@ -13,7 +14,16 @@
     "BroadRidge_Vanguard" : {
         "Source_Name_Pattern" : "BroadridgeV*.txt",
         "Source_Directory" : "/dir1/dir2/",
-        "Actions_List": null,
+        "FTP_Source" : "UP",
+        "Actions": null,
+        "Destination_Name" : "BroadridgeV_apr_2017.txt",
+        "Destination_Directory" : "3rdParty/Broadridge/Vanguard"
+    },
+    "New_File" : {
+        "Source_Name_Pattern" : "File_Pattern*.txt",
+        "Source_Directory" : "/dir1/dir2/",
+        "FTP_Source" : "ZS",
+        "Actions": null,
         "Destination_Name" : "BroadridgeV_apr_2017.txt",
         "Destination_Directory" : "3rdParty/Broadridge/Vanguard"
     }
