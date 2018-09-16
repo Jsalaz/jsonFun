@@ -4,16 +4,15 @@ import pprint
 import os
 import fnmatch as fnm
 import ftp_download
+import subprocess
 #from nt import listdir
 
 # filename="Ingest_List_3.json"
-# directory="C:/Users/j_sal/git/Ingest"
-# data_dir="../data/"
 
 # Action Sets
-FTP_Action_Set = {"FTP_Download", "FTP_Move", "FTP_Copy", "FTP_Delete"}
-File_Actions = {"Rename", "Unzip"}
-S3_Action_Set = {"S3_Upload", "S3_Move", "S3_Delete"}
+FTP_Action_Set = {"FTP_list", "FTP_Download", "FTP_Download_Multiple", "FTP_Move", "FTP_Delete"}
+File_Actions_Set = {"FILE_Rename", "FILE_Unzip", "FILE_Move", "FILE_Delete"}
+S3_Action_Set = {"S3_Upload", "S3_Move", "S3_Delete", "S3_Download"}
 
 
 class Ingest(object):
@@ -24,7 +23,7 @@ class Ingest(object):
         self.s3_name = ingest_vars['Destination_Name']
         self.s3_dir = ingest_vars['Destination_Directory']
         self.action_list = ingest_vars['Actions']
-        self.ftp_source = ingest_vars['FTP_Source']
+        self.share_id = ingest_vars['Share_ID']
         self.bucketname = config_vars['Bucketname']
         self.kms = config_vars['S3_KMS_ARN']
         self.app_id = config_vars['App_ID']
@@ -49,8 +48,33 @@ class Ingest(object):
     def s3_actions(self):
         return None
 
-    def ftp_actions(self):
+    def ftp_actions(self, password, action_list):
+        ftp_download.process_work(
+            self.source_name_pattern,
+            self.source_dir,
+            self.app_id,
+            self.password,
+            self.ftp_server,
+            action_list
+        )
         return None
+
+    def fetch_password(self):
+        if self.share_id == "ZS":
+            password = self.zs_password
+        elif self.share_id == "UP":
+            password = self.up_password
+        else:
+            return None
+
+        password = subprocess.run(["commands" "params"],
+                                  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        password = password.stdout.decode()
+        password = password.stdout
+        # or
+        # import password management module from workspace &
+        # run getPassword command
+        return password
 
     def action_manager(self):
         # No Actions
@@ -59,14 +83,18 @@ class Ingest(object):
         # Ftp Actions
         if set(self.action_list) & FTP_Action_Set:
             # redirect to new script
-            self.ftp_actions()
+            password = self.fetch_password()
+            actions = list(filter(lambda z: z.startswith('FTP'), self.action_list))
+            self.ftp_actions(password=password, action_list=actions)
         # File Actions
-        if set(self.action_list) & File_Actions:
+        if set(self.action_list) & File_Actions_Set:
             # redirect o new script?
+            actions = list(filter(lambda z: z.startswith('FILE'), self.action_list))
             self.rename_files()
         # S3 Actions
         if set(self.action_list) & S3_Action_Set:
             # redirect to new script
+            actions = list(filter(lambda z: z.startswith('S3'), self.action_list))
             self.s3_actions()
 
 
@@ -79,7 +107,7 @@ def process_work(ingest_vars, config_vars):
 
 
 # Reads filename var declared at top; used for testing
-def read_json():
+def read_json(filename):
     print("--- Read JSON ---")
     with open(filename) as fn:
         js1 = json.load(fn)
