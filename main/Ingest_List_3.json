@@ -1,30 +1,30 @@
 {
-    "BroadRidge_Industry" : {
+    "Old_File_Stream" : {
         "Source_Name_Pattern" : "Broadridge Industy.txt",
         "Source_Directory" : "/dir1/dir2/",
-        "FTP_Source" : "ZS",
+        "Share_ID" : "ZS",
         "Actions" : [
         	"FTP_Download",
-        	"Rename_File",
+        	"FILE_Rename",
         	"S3_Upload"
     	],
         "Destination_Name" : "BroadridgeI_apr_2017.txt",
         "Destination_Directory" : "3rdParty/Broadridge/Industry"
     },
-    "BroadRidge_Vanguard" : {
+    "Other_File_Stream" : {
         "Source_Name_Pattern" : "BroadridgeV*.txt",
         "Source_Directory" : "/dir1/dir2/",
-        "FTP_Source" : "UP",
+        "Share_ID" : "UP",
         "Actions": null,
         "Destination_Name" : "BroadridgeV_apr_2017.txt",
-        "Destination_Directory" : "3rdParty/Broadridge/Vanguard"
+        "Destination_Directory" : "3rdParty/Broadridge/VG"
     },
     "New_File" : {
         "Source_Name_Pattern" : "File_Pattern*.txt",
         "Source_Directory" : "/dir1/dir2/",
-        "FTP_Source" : "ZS",
+        "Share_ID" : "ZS",
         "Actions": null,
         "Destination_Name" : "BroadridgeV_apr_2017.txt",
-        "Destination_Directory" : "3rdParty/Broadridge/Vanguard"
+        "Destination_Directory" : "3rdParty/Broadridge/VG_new"
     }
 }

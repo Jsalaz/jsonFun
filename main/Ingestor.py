@@ -20,8 +20,8 @@ class Ingest(object):
         self.stream = stream
         self.source_name_pattern = ingest_vars['Source_Name_Pattern']
         self.source_dir = ingest_vars['Source_Directory']
-        self.s3_name = ingest_vars['Destination_Name']
-        self.s3_dir = ingest_vars['Destination_Directory']
+        self.destination_name = ingest_vars['Destination_Name']
+        self.destination_dir = ingest_vars['Destination_Directory']
         self.action_list = ingest_vars['Actions']
         self.share_id = ingest_vars['Share_ID']
         self.bucketname = config_vars['Bucketname']
@@ -35,7 +35,7 @@ class Ingest(object):
 
     def rename_files(self):
         # Add another function to resolve pattern
-        outfile = self.s3_name  # fetch file pattern to use
+        outfile = self.destination_name  # fetch file pattern to use
         for file in os.listdir(self.data_dir):
             if fnm.fnmatch(file, self.source_name_pattern):
                 os.rename(self.data_dir+file, self.data_dir+outfile)
@@ -106,13 +106,17 @@ def process_work(ingest_vars, config_vars):
         ingest.action_manager()
 
 
-# Reads filename var declared at top; used for testing
+# Reads json and returns dictionary
 def read_json(filename):
     print("--- Read JSON ---")
     with open(filename) as fn:
         js1 = json.load(fn)
     pprint.pprint(js1)
     return js1
+
+
+def load_configs(ingestfile, configfile):
+    process_work(read_json(ingestfile), read_json(configfile))
 
 
 # User specifies the json file to be parsed
@@ -136,4 +140,4 @@ if __name__ == '__main__':
     pprint.pprint(ingestfile)
     pprint.pprint(configfile)
     process_work(ingestfile, configfile)
-#    process_work(read_json())
+# read_json(ingestfile)
